@@ -38,26 +38,32 @@ public class Bus {
     public ArrayList<Passenger> findPassengersWithoutTickets(){
         ArrayList<Passenger> Schwarzfahrer = new ArrayList<Passenger>();
 
+
         for (Passenger p : passengers) {
             if(p.ticket == false){
                 Schwarzfahrer.add(p);
-                Schwarzfahrer.remove(p);
             }
         }
+        passengers.removeAll(Schwarzfahrer);
         return Schwarzfahrer;
 
     }
 
     public void transferPassengers(Bus otherBus, String[] passengerNames){
 
-        for (String pName : passengerNames){
-            for (Passenger p : passengers){
+
+
+        ArrayList<Passenger> Umsteiger = new ArrayList<Passenger>();
+        for (Passenger p : passengers){
+            for (String pName : passengerNames){
                 if(p.name.equals(pName)){
                     otherBus.enterBus(p);
-                    passengers.remove(p);
+                    Umsteiger.add(p);
                 }
             }
         }
+        passengers.removeAll(Umsteiger);
+
     }
 
 
