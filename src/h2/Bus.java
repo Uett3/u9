@@ -15,7 +15,7 @@ public class Bus {
 
     private void exitBus(){
         for(int i = 0; i < passengers.size(); i++){
-            if(passengers.get(i).visited == passengers.get(i).planned){
+            if(passengers.get(i).visited >= passengers.get(i).planned){
                 passengers.remove(i);
                 i -= 1;
             }
@@ -23,10 +23,15 @@ public class Bus {
     }
 
     public void nextStop(Passenger[] boarding){
+
+
         for (Passenger p : passengers) {
             p.visited++;
         }
         exitBus();
+        if (boarding == null) {
+            return;
+        }
         for (Passenger p : boarding) {
             passengers.add(p);
         }
