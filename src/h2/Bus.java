@@ -17,6 +17,7 @@ public class Bus {
         for(int i = 0; i < passengers.size(); i++){
             if(passengers.get(i).visited == passengers.get(i).planned){
                 passengers.remove(i);
+                i -= 1;
             }
         }
     }
@@ -32,6 +33,31 @@ public class Bus {
     }
     public void nextStop() {
         nextStop(new Passenger[0]);
+    }
+
+    public ArrayList<Passenger> findPassengersWithoutTickets(){
+        ArrayList<Passenger> Schwarzfahrer = new ArrayList<Passenger>();
+
+        for (Passenger p : passengers) {
+            if(p.ticket == false){
+                Schwarzfahrer.add(p);
+                Schwarzfahrer.remove(p);
+            }
+        }
+        return Schwarzfahrer;
+
+    }
+
+    public void transferPassengers(Bus otherBus, String[] passengerNames){
+
+        for (String pName : passengerNames){
+            for (Passenger p : passengers){
+                if(p.name.equals(pName)){
+                    otherBus.enterBus(p);
+                    passengers.remove(p);
+                }
+            }
+        }
     }
 
 
